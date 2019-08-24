@@ -5,14 +5,15 @@ var inner = $C.Polygon.NGON('inner', 20, 198, new $C.Vector(window.innerWidth / 
 var outer = $C.Polygon.NGON('outer', 20, 200, new $C.Vector(window.innerWidth / 2, window.innerHeight / 2), 'white');
 var p = new $C.Rectangle('adfjl', 0, 0, 2, 16, 'red');
 p.points.forEach(function (point) {
-    point.y -= 200;
+    point.y -= 198;
 });
 var zero = new $C.Polygon('zero', window.innerWidth / 2, window.innerHeight / 2, p.points, 'red');
+var pointer = new $C.Rectangle('pointer', window.innerWidth / 2 + 1, window.innerHeight / 2 - 218, 2, 10, 'white'); 
 var d = document.querySelector('#d');
 d.width = window.innerWidth;
 d.height = window.innerHeight;
 var ctx = d.getContext('2d');
-world.set(outer, inner, zero);
+world.set(outer, inner, zero, pointer);
 ctx.font = "50px Courier";
 ctx.fillStyle = "white";
 world.update = function () {
@@ -24,7 +25,7 @@ world.update = function () {
     }
     if (number < 0) number = 20 + number;
     number %= 20;
-    rounded = Math.floor(number);
+    rounded = Math.round(number);
     if (rounded < 10) {
         rounded = "0" + rounded;
     }
